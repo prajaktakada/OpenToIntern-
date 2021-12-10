@@ -108,47 +108,8 @@ const createIntern = async function (req, res) {
     }
 }
 
-const getCollegeDetails = async function (req, res){
-    try{
-        let que = req.query;
-        if(!isValidRequestBody(que)){
-            res.status(400).send({status: false, msg: `Invalid request. No request passed in the query`}) 
-            return
-        }
-        let collegeAbb = req.query.name;
-       
-        let collegeDetail = await CollegeModel.findOne({name: collegeAbb, isDeleted: false})//.select({name: 1, fullName: 1, logoLink: 1})
-      //console.log(collegeDetail)
 
-        if(!isValid(collegeDetail)){
-            res.status(400).send({ status: false, message: `Invalid request parameters. ${collegeAbb} is not a valid college name` })
-            return
-        }
-
-        clgId = collegeDetail._id;
-       // console.log(clgId)
-
-         let internsData = await InternModel.find({collegeId: clgId, isDeleted: false}).select({_id: 1, name:1,email: 1, mobile: 1})
-         if(internsData.length == 0){
-            res.status(204).send({ status: true, message: ` No interns applied for this college` })
-            return
-         }
-       
-        let newData = {
-            name: collegeDetail.name, 
-            fullName: collegeDetail.fullName, 
-            logoLink: collegeDetail.logoLink,
-            internsData: internsData 
-        }
-
-        res.status(200).send({ status: true, message: `college details with intern ` , data: newData })
-
-    }catch(err){
-        res.status(500).send({ status: false, message: err.message });
-    }
-}
 
 
 
 module.exports.createIntern = createIntern;
-module.exports.getCollegeDetails = getCollegeDetails 
