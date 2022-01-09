@@ -16,8 +16,7 @@ const isValidRequestBody = function (requestBody) {
 //let interests = [];
 
 
-// creating college
-
+// creating intern
 const createIntern = async function (req, res) {
     try {
         const requestBody = req.body;

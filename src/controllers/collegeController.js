@@ -12,7 +12,6 @@ const isValidRequestBody = function (requestBody) {
 }
 
 // creating college
-
 const createCollege = async function (req, res) {
     try {
         const requestBody = req.body; 
@@ -64,7 +63,7 @@ const createCollege = async function (req, res) {
 }
 
 
-//
+//get
 const getCollegeDetails = async function (req, res){
     try{
         let que = req.query;
